@@ -1,0 +1,38 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-end">
+    <a href="{% url 'admin_create_event' %}" class="mb-2">+ New Event</a>
+</div>
+
+<table class="table table-light table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Category</th>
+            <th>Seats</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.start_time }}</td>
+            <td>{{ item.end_time }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.total_seats }}</td>
+            <td>
+                <a href="{% url 'admin_edit_event' id=item.id %}" class="text-success">Edit</a> |
+                <a href="{% url 'admin_delete_event' item.id %}" class="text-danger"
+                    onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

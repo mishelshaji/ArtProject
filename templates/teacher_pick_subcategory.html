@@ -1,0 +1,248 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SkillVoyage - Teacher Qualification</title>
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .header-area {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-area .classy-navbar {
+            padding: 10px 0;
+        }
+        .header-area .nav-brand img {
+            max-height: 50px;
+        }
+        .classynav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .classynav li {
+            position: relative;
+            margin: 0 15px;
+        }
+        .classynav li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .classynav .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        .classynav li:hover .dropdown {
+            display: block;
+        }
+        .login-area {
+            padding: 50px 0;
+        }
+        .login-content {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .login-content h3 {
+            margin-bottom: 20px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card-img-wrapper {
+            width: 100%;
+            padding-top: 100%; /* This creates a square aspect ratio */
+            position: relative;
+            overflow: hidden;
+        }
+        .card-img-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 15px;
+            flex: 1;
+        }
+        .card-body h4 {
+            margin: 15px 0;
+            font-size: 1.25rem;
+        }
+        .card-body a {
+            display: block;
+            text-align: center;
+            margin-top: auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .card-body a:hover {
+            background-color: #0056b3;
+        }
+        .container-fluid {
+            padding: 0 15px;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .col-sm-4 {
+            flex: 1 1 calc(33.333% - 15px);
+        }
+        .footer-area {
+            background-color: #222;
+            color: #fff;
+            padding: 30px 0;
+        }
+        .footer-area a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-area .copywrite-text {
+            margin-top: 10px;
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .footer-nav li {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-area">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+                        <a href="{% url 'home' %}" class="nav-brand">SkillVoyage</a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul>
+                                    
+                                    <li><a href="#">Categories</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'courses' %}">Music</a></li>
+                                            <li><a href="{% url 'courses' %}">Dance</a></li>
+                                            <li><a href="{% url 'courses' %}">Drawing</a></li>
+                                            <li><a href="{% url 'courses' %}">Karate</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'events' %}">Events</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                                <div class="logout-btn">
+                                    <a href="{% url 'logout' %}" class="btn oneMusic-btn">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p>Great Selection</p>
+            <h2>Select a sub-category</h2>
+        </div>
+    </section>
+    <section class="login-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="login-content">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="text-center">Create Your First Course</h3>
+                            <p>Pick a sub-category.</p>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                {% for category in subcategories %}
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-img-wrapper">
+                                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h4>{{ category.name }}</h4>
+                                            <hr>
+                                            <a href="{% url 'teacher_create_course' category.id %}">Start Creating Course</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6 text-center text-md-left">
+                    <p class="copywrite-text">
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 text-center text-md-right">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'courses' %}">Courses</a></li>
+                            <li><a href="{% url 'events' %}">Events</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+</html>

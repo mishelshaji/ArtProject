@@ -1,0 +1,8 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Certificate for {{ course.course.name }}</h1>
+<div class="row mt-5">
+    <a href="{{ certificate_url }}">Download Certificate</a>
+</div>
+{% endblock content %}

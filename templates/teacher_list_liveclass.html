@@ -1,0 +1,40 @@
+{% extends 'shared/teacher_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-center">Live Classes</h3>
+    <a href="{% url 'teacher_create_liveclass' %}">+ New Live Class</a>
+</div>
+<div class="container-fluid">
+    <table class="table table-light table-bordered w-full">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Course</th>
+                <th>Link</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.start_time }}</td>
+                <td>{{ item.end_time }}</td>
+                <td>{{ item.course }}</td>
+                <td>{{ item.live_url }}</td>
+                <td>
+                    <a href="{% url 'teacher_delete_liveclass' id=item.id %}" class="text-danger"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+{% endblock content %}

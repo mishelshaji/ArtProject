@@ -1,0 +1,149 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SkillVoyage - Teacher Qualification</title>
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="header-area">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+                        <a href="{% url 'home' %}" class="nav-brand"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                                    <li><a href="#">Categories</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'courses' %}">Music</a></li>
+                                            <li><a href="{% url 'courses' %}">Dance</a></li>
+                                            <li><a href="{% url 'courses' %}">Drawing</a></li>
+                                            <li><a href="{% url 'courses' %}">Karate</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'events' %}">Events</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                                <div class="logout-btn">
+                                    <a href="{% url 'logout' %}" class="btn oneMusic-btn">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p>Provide your details</p>
+            <h2>Guide Qualification</h2>
+        </div>
+    </section>
+    <section class="login-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="login-content">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3>Guide Qualification Form</h3>
+                        </div>
+                        <div class="login-form">
+                            <form id="teacherQualificationForm" action="{% url 'teacher_qualification' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="id_full_name">Full Name</label>
+                                            <input type="text" name="full_name" id="id_full_name" class="form-control" value="{{ teacher_request.full_name|default_if_none:'' }}">
+                                            <small id="full_name_error" class="form-text text-danger"></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_email">Email</label>
+                                            <input type="email" name="email" id="id_email" class="form-control" value="{{ teacher_request.email|default_if_none:'' }}">
+                                            <small id="email_error" class="form-text text-danger"></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_phone_number">Phone Number</label>
+                                            <input type="text" name="phone_number" id="id_phone_number" class="form-control" value="{{ teacher_request.phone_number|default_if_none:'' }}">
+                                            <small id="phone_number_error" class="form-text text-danger"></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_qualification">Qualification</label>
+                                            <input type="text" name="qualification" id="id_qualification" class="form-control" value="{{ teacher_request.qualification|default_if_none:'' }}">
+                                            <small id="qualification_error" class="form-text text-danger"></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="id_experience_years">Years of Experience</label>
+                                            <input type="number" name="experience_years" id="id_experience_years" class="form-control" value="{{ teacher_request.experience_years|default_if_none:'' }}">
+                                            <small id="experience_years_error" class="form-text text-danger"></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_skills">Skills</label>
+                                            <input type="text" name="skills" id="id_skills" class="form-control" value="{{ teacher_request.skills|default_if_none:'' }}">
+                                            <small id="skills_error" class="form-text text-danger"></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_resume">Upload Resume (PDF only):</label>
+                                            <input type="file" id="id_resume" name="resume" accept=".pdf">
+                                            <span id="resume_error" style="color: red;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <a href="#"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                    <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'courses' %}">Courses</a></li>
+                            <li><a href="{% url 'events' %}">Events</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+</html>

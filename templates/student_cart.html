@@ -1,0 +1,35 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Cart</h1>
+<div class="row mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart in carts %}
+            <tr>
+                <td>{{ cart.product.name }}</td>
+                <td>{{ cart.product.price }}</td>
+                <td>{{ cart.quantity }}</td>
+                <td>
+                    <a href="{% url 'student_cart_delete' cart.id %}" class="text-danger"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<div class="d-flex justify-content-end">
+    <a href="{% url 'student_place_order' %}" class="btn btn-primary mt-2">Place Order</a>
+</div>
+{% endblock content %}

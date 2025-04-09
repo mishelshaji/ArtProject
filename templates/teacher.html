@@ -1,0 +1,68 @@
+{% extends 'shared/teacher_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Guide Qualification Form</h3>
+</div>
+{% if teacher_request.status == 'Pending' %}
+<div class="alert alert-warning" role="alert" style="color: red;">
+    Approval is pending by SkillVoyage.
+</div>
+{% endif %}
+<div class="login-form">
+    <form id="teacherQualificationForm" action="{% url 'teacher_qualification' %}" method="post"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id_full_name">Full Name</label>
+                    <input type="text" name="full_name" id="id_full_name" class="form-control"
+                        value="{{ teacher_request.full_name|default_if_none:'' }}">
+                    <small id="full_name_error" class="form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email</label>
+                    <input type="email" name="email" id="id_email" class="form-control"
+                        value="{{ teacher_request.email|default_if_none:'' }}">
+                    <small id="email_error" class="form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label for="id_phone_number">Phone Number</label>
+                    <input type="text" name="phone_number" id="id_phone_number" class="form-control"
+                        value="{{ teacher_request.phone_number|default_if_none:'' }}">
+                    <small id="phone_number_error" class="form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label for="id_qualification">Qualification</label>
+                    <input type="text" name="qualification" id="id_qualification" class="form-control"
+                        value="{{ teacher_request.qualification|default_if_none:'' }}">
+                    <small id="qualification_error" class="form-text text-danger"></small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id_experience_years">Years of Experience</label>
+                    <input type="number" name="experience_years" id="id_experience_years" class="form-control"
+                        value="{{ teacher_request.experience_years|default_if_none:'' }}">
+                    <small id="experience_years_error" class="form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label for="id_skills">Skills</label>
+                    <input type="text" name="skills" id="id_skills" class="form-control"
+                        value="{{ teacher_request.skills|default_if_none:'' }}">
+                    <small id="skills_error" class="form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label for="id_resume">Upload Resume (PDF only):</label>
+                    <input type="file" id="id_resume" name="resume" accept=".pdf">
+                    <span id="resume_error" style="color: red;"></span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
+    </form>
+</div>
+{% endblock content %}

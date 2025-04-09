@@ -1,0 +1,35 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Courses</h1>
+    <table class="table table-light table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lessons</th>
+                <th>Price</th>
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.name }}</td>
+                <td>{{ course.lessons.count }}</td>
+                <td>{{ course.price }}</td>
+
+                <th>
+                    {% if course.is_pending %}
+                    <a href="{% url 'admin_approve_course' course.id %}" class="text-success">Approve</a>
+                    {% else %}
+                    <a href="{% url 'admin_reject_course' course.id %}" class="text-danger">Reject</a>
+                    {% endif %}
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

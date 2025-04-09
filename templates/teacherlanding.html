@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Upload Course">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upload Course - SkillVoyage</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* Customize the style to match the look and feel of your platform */
+        .upload-course-container {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .upload-course-header {
+            margin-bottom: 20px;
+        }
+        .upload-course-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .upload-course-form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .upload-section {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px dashed #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+        .upload-section:hover {
+            background-color: #f0f0f0;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-area">
+        <!-- Keep the same header as your existing pages -->
+    </header>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'categories' %}">Categories</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Upload Course</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="upload-course-area">
+        <div class="container">
+            <div class="upload-course-container">
+                <div class="upload-course-header">
+                    <h2>Create Your Course</h2>
+                    <p>Fill in the details below to create your course.</p>
+                </div>
+
+                <form class="upload-course-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="course-title">Course Title</label>
+                        <input type="text" id="course-title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course-description">Description</label>
+                        <textarea id="course-description" name="description" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="course-category">Category</label>
+                        <input type="text" id="course-category" name="category" value="{{ selected_category }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="course-subcategory">Subcategory</label>
+                        <input type="text" id="course-subcategory" name="subcategory" value="{{ selected_subcategory }}" readonly>
+                    </div>
+                    <div class="upload-section" onclick="document.getElementById('file-upload').click();">
+                        <p>Drag & drop your course files here or click to upload</p>
+                        <input type="file" id="file-upload" name="course_files[]" multiple style="display: none;" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Course</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-area">
+        <!-- Keep the same footer as your existing pages -->
+    </footer>
+</body>
+</html>

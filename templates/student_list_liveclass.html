@@ -1,0 +1,45 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Live Classes</h1>
+<div class="row mt-5">
+
+    {% if not object_list %}
+    <div class="alert alert-primary" role="alert">
+        <strong>No Live Classes Found.</strong>
+        Click <a href="{% url 'student_more_courses' %}" class="alert-link">here</a>
+        to enroll in a course and check again for events.
+    </div>
+
+    {% endif %}
+
+    {% for event in object_list %}
+    <table class="table table-light table-bordered w-full">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.start_time }}</td>
+                <td>{{ item.end_time }}</td>
+                <td>{{ item.course }}</td>
+                <td>
+                    <a href="{{ item.live_url }}" target="_blank" class="text-primary">Join</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% endfor %}
+
+</div>
+{% endblock content %}

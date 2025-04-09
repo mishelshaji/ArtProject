@@ -1,0 +1,82 @@
+
+{% load static %}
+
+{% block extra_head %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-dark-mode/1.0.2/bootstrap-dark-mode.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    .content-wrapper {
+        padding: 2rem;
+    }
+    .upload-area {
+        border: 2px dashed #6c757d;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .upload-area:hover {
+        border-color: #007bff;
+    }
+    .result-area {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+    }
+    .loading {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-5 animate__animated animate__fadeInDown">Discover Your Art</h1>
+            <div class="upload-area animate__animated animate__fadeIn" data-aos="fade-up">
+                <form action="{% url 'find_art' %}" method="post" enctype="multipart/form-data" id="artForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="artImage" class="h4 mb-3">Upload an image to identify the art form:</label>
+                        <input type="file" name="art_image" id="artImage" class="form-control-file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg mt-3">Analyze Art</button>
+                </form>
+            </div>
+            
+            <div class="loading text-center mt-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="mt-2">Analyzing your artwork...</p>
+            </div>
+
+            {% if art_form %}
+            <div class="result-area animate__animated animate__fadeIn" data-aos="fade-up">
+                <h2 class="text-center mb-4">Analysis Results</h2>
+                <h4 class="text-primary">Art Form: {{ art_form }}</h4>
+                <p class="lead">{{ description }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init();
+
+    document.getElementById('artForm').addEventListener('submit', function(e) {
+        document.querySelector('.loading').style.display = 'block';
+    });
+</script>
+{% endblock %}

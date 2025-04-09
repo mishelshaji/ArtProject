@@ -1,0 +1,32 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Events</h1>
+<div class="row mt-5">
+
+    {% if not events %}
+    <div class="alert alert-primary" role="alert">
+        <strong>No events found.</strong>
+        Click <a href="{% url 'student_more_courses' %}" class="alert-link">here</a>
+        to enroll in a course and check again for events.
+    </div>
+
+    {% endif %}
+
+    {% for event in events %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="{{ event.banner_image.url }}" alt="" class="img-fluid"
+                    style="max-width: 300px; max-height: 300px;">
+                <h5 class="card-title mt-3">{{ event.title }}</h5>
+                <p class="card-text">Category: {{ event.category.name }}</p>
+                <p class="card-text">Price: {{ event.entry_fee }}</p>
+                <a href="{% url 'student_event_detail' id=event.id %}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}

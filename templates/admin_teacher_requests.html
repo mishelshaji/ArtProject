@@ -1,0 +1,46 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block content %}
+<div class="table-wrapper">
+    <h2 class="text-center text-white">Teacher Requests</h2>
+    <table class="table table-light table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Qualification</th>
+                <th>Resume</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in teacher_requests %}
+            <tr>
+                <td>{{ request.full_name }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.qualification }}</td>
+                <td><a href="{{ request.resume.url }}" target="_blank">View Resume</a></td>
+                <td>{{ request.status }}</td>
+                <td>
+                    {% if request.status == 'Pending' %}
+                    <form action="{% url 'accept_teacher' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="request_id" value="{{ request.id }}">
+                        <button type="submit" class="accept-button">Accept</button>
+                    </form>
+                    <form action="{% url 'reject_teacher' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="request_id" value="{{ request.id }}">
+                        <button type="submit" class="reject-button">Reject</button>
+                    </form>
+                    {% else %}
+                    <span>{{ request.status }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

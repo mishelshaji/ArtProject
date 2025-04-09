@@ -1,0 +1,95 @@
+{% extends 'shared/student_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">Welcome {{ user.email }}</h3>
+                    <p>Your Courses</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="list-group bg-info">
+                {% for item in lessons %}
+                <li class="list-group-item bg-dark text-light">
+                    <a href="{% url 'student_view_lesson' id=item.id %}" class="text-light">{{item.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-10 border border-1 border-white rounded">
+            {% if lesson.get_file_type == 'Image' %}
+            <img src="{{ lesson.resource.url }}" style="max-width: 60vw">
+            {% else %}
+            <!-- <video src="{{ lesson.resource.url }}" controls></video> -->
+            <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+            <video id="my-video" class="video-js" controls preload="auto" data-setup="{}" style="width: 100%;">
+                <source src="{{ lesson.resource.url }}" type="video/mp4" />
+                <track kind="captions" src="{% url 'student_subtitle_lesson' id=lesson.id language='English' %}"
+                    srclang="en" label="English" default>
+                <track kind="captions" src="{% url 'student_subtitle_lesson' id=lesson.id language='Malayalam' %}"
+                    srclang="ml" label="Malayalam">
+                <track kind="captions" src="{% url 'student_subtitle_lesson' id=lesson.id language='Tamil' %}"
+                    srclang="ta" label="Tamil">
+            </video>
+            <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+            {% endif %}
+            <div class="my-4 d-flex justify-content-end">
+                <a href="{% url 'student_get_certificate' id=lesson.course_id %}">Get Certificate</a>
+            </div>
+            <div class="my-4">
+                {{ lesson.summary }}
+            </div>
+            <div id="feedback-section" style="display: none; margin-top: 20px;">
+                <h4>Feedback</h4>
+                <form method="POST" action="{% url 'submit_feedback' lesson.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="rating">Rate this lesson:</label>
+                        <select class="form-control" id="rating" name="rating" required>
+                            <option value="">Select Rating</option>
+                            <option value="1">1 - 😞 Poor</option>
+                            <option value="2">2 - 😐 Fair</option>
+                            <option value="3">3 - 🙂 Good</option>
+                            <option value="4">4 - 😊 Very Good</option>
+                            <option value="5">5 - 😍 Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-text">Your Feedback:</label>
+                        <textarea class="form-control" id="feedback-text" name="feedback" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.querySelector('video');
+        const feedbackSection = document.getElementById('feedback-section');
+
+        if (video) {
+            video.addEventListener('ended', function () {
+                feedbackSection.style.display = 'block';  // Show the feedback form
+                window.scrollTo({
+                    top: feedbackSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+</script>
+{% endblock footer %}

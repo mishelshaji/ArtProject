@@ -1,0 +1,20 @@
+{% extends 'shared/teacher_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-center">Create Your Course</h3>
+    <p>Get started here.</p>
+</div>
+<div class="container-fluid">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+
+        <div class="d-grid">
+            {% csrf_token %}
+            <button type="submit" class="btn oneMusic-btn mt-30">Create Course</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

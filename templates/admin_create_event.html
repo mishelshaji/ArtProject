@@ -1,0 +1,91 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block header %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock header %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center">Event</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>{{ form.title.label }}</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.description.label }}</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.start_time.label }}</label>
+            {{ form.start_time }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.end_time.label }}</label>
+            {{ form.end_time }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.category.label }}</label>
+            {{ form.category }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.total_seats.label }}</label>
+            {{ form.total_seats }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.banner_image.label }}</label>
+            {{ form.banner_image }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.promo_video_url.label }}</label>
+            {{ form.promo_video_url }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.organizer_name.label }}</label>
+            {{ form.organizer_name }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.registration_url.label }}</label>
+            {{ form.registration_url }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.location_url.label }}</label>
+            {{ form.location_url }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.entry_fee.label }}</label>
+            {{ form.entry_fee }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.organizer_phone.label }}</label>
+            {{ form.organizer_phone }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.organizer_email.label }}</label>
+            {{ form.organizer_email }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.instructions.label }}</label>
+            {{ form.instructions }}
+        </div>
+        <div class="d-flex justify-content-end">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary mt-2">Add Event</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+
+{% block footer %}
+<script>
+    document.querySelectorAll('input, select, textarea').forEach(e => {
+        e.classList.add('form-control');
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("id_description") });
+</script>
+{% endblock footer %}

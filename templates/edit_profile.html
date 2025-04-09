@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Edit Profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SkillVoyage - Edit Profile</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Header Area -->
+    <header class="header-area">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+                        <!-- Nav brand -->
+                        <a href="{% url 'home' %}" class="nav-brand">SkillVoyage</a>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                                    <li><a href="#">Categories</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'courses' %}">Music</a></li>
+                                            <li><a href="{% url 'courses' %}">Dance</a></li>
+                                            <li><a href="{% url 'courses' %}">Drawing</a></li>
+                                            <li><a href="{% url 'courses' %}">Karate</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'events' %}">Events</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+
+                                <div class="login-register-cart-button d-flex align-items-center">
+                                    <div class="login-register-btn mr-50">
+                                        <a href="{% url 'logout' %}" id="loginBtn">Logout</a>
+                                    </div>
+                                    <div class="cart-btn">
+                                        <p><span class="icon-shopping-cart"></span> <span class="quantity">1</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcumb Area -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p>Edit Profile</p>
+            <h2>Edit Your Details</h2>
+        </div>
+    </section>
+
+    <!-- Profile Area -->
+    <section class="profile-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="profile-content">
+                        <h3>Edit Your Profile</h3>
+                        <div class="profile-form">
+                            <form method="POST" id="editProfileForm">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="username"><strong>Username:</strong></label>
+                                    <input type="text" id="username" name="username" value="{{ user.username }}" required class="form-control">
+                                    <small id="usernameError" class="form-text text-danger" style="display:none;">Username must not contain numbers.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><strong>Email:</strong></label>
+                                    <input type="email" id="email" name="email" value="{{ user.email }}" required class="form-control">
+                                    <small id="emailError" class="form-text text-danger" style="display:none;">Please enter a valid email address.</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                            <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Albums</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- All Javascript Script -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <script src="{% static 'js/active.js' %}"></script>
+    
+    <!-- Custom Validation Script -->
+    <script>
+        document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+            let valid = true;
+
+            // Username validation: must not contain numbers
+            const username = document.getElementById('username').value;
+            const usernameError = document.getElementById('usernameError');
+            if (/\d/.test(username)) {
+                usernameError.style.display = 'block';
+                valid = false;
+            } else {
+                usernameError.style.display = 'none';
+            }
+
+            // Email validation: must be a valid email format
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.style.display = 'block';
+                valid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // If not valid, prevent form submission
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

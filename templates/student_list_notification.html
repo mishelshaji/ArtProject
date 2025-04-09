@@ -1,0 +1,26 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Notifications</h1>
+<div class="row mt-5">
+
+    {% if not object_list %}
+    <div class="alert alert-primary" role="alert">
+        <strong>No notifications.</strong>
+    </div>
+
+    {% endif %}
+
+    <table class="table table-light table-bordered table-striped">
+        <tbody>
+            {% for notification in object_list %}
+            <tr>
+                <td>{{ notification.content }}</td>
+                <td>{{ notification.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock content %}

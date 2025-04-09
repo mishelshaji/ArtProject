@@ -1,0 +1,81 @@
+{% extends 'shared/teacher_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-center">Welcome Teacher</h3>
+    <p>This is your dashboard</p>
+</div>
+<div class="container-fluid">
+    <div class="row d-flex" style="justify-content: stretch;">
+
+        {% for course in courses %}
+        <div class="col-md-6 grid-margin stretch-card">
+
+            <div class="card">
+                <div class="card-body">
+
+                    {% if course.is_draft %}
+                    <span class="badge badge-primary">Draft</span>
+                    {% elif course.is_pending %}
+                    <span class="badge badge-warning">Pending</span>
+                    {% elif course.is_archived %}
+                    <span class="badge badge-danger">Archived</span>
+                    {% else %}
+                    <span class="badge badge-success">Published</span>
+                    {% endif %}
+
+                    <img src="{{ course.featured_image.url }}" alt="" style="height: 250px; width: 500px;">
+                    <h4 class="card-title">{{ course.name }}</h4>
+                    <p class="card-text">{{ course.sub_category.category }} > {{ course.sub_category }}</p>
+                    <p class="card-text">
+                        Lessons: {{ course.lessons.count }}
+
+                        {% if course.lessons.count > 0 and not course.is_pending and not course.is_archived and not course.is_published %} |
+                        <a href="{% url 'teacher_request_course_approval' id=course.id %}">Submit For Approval</a>
+                        {% endif %}
+
+                    </p>
+                    <!-- Feedback Section -->
+                    <div class="feedback-section">
+                        <h5>Student Feedback:</h5>
+                        <ul class="list-unstyled">
+                            {% for feedback in course.feedback.all %}
+                            <li>{{ feedback.student.username }}: {{ feedback.comment }} (Rating: {{ feedback.rating }})
+                            </li>
+                            {% empty %}
+                            <li>No feedback available for this course.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'teacher_edit_course' id=course.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'teacher_create_course_lesson' id=course.id %}"
+                        class="btn btn-secondary">Lessons</a>
+
+                    <!--{% if course.status != 'archived' %}
+                            <a href="{% url 'teacher_delete_course' id=course.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}-->
+
+
+                    {% if course.status == 'archived' %}
+                    <a href="{% url 'teacher_restore_course' id=course.id %}" class="btn btn-info">Restore</a>
+                    {% endif %}
+
+
+                    {% if course.status == 'published' %}
+                    <a href="{% url 'teacher_course_students' id=course.id %}" class="btn btn-info">Students</a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}

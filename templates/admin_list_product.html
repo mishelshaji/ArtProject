@@ -1,0 +1,37 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-end">
+    <a href="{% url 'admin_create_product' %}" class="mb-2">+ New Product</a>
+</div>
+
+<table class="table table-light table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.status }}</td>
+            <td>
+                <a href="{% url 'admin_edit_product' product.id %}" class="text-success">Edit</a> |
+                `
+                <a href="{% url 'admin_delete_product' product.id %}" class="text-danger"
+                    onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

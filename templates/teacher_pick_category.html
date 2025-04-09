@@ -1,0 +1,118 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SkillVoyage - Teacher Qualification</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="header-area">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+                        <a href="{% url 'home' %}" class="nav-brand">SkillVoyage</a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul>
+                                   
+                                    <li><a href="#">Categories</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'courses' %}">Music</a></li>
+                                            <li><a href="{% url 'courses' %}">Dance</a></li>
+                                            <li><a href="{% url 'courses' %}">Drawing</a></li>
+                                            <li><a href="{% url 'courses' %}">Karate</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'events' %}">Events</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                                <div class="logout-btn">
+                                    <a href="{% url 'logout' %}" class="btn oneMusic-btn">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p>We're glad yo are here</p>
+            <h2>Welcome Instructor</h2>
+        </div>
+    </section>
+    <section class="login-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="login-content">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="text-center">Create Your First Course</h3>
+                            <p>Pick a category first.</p>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row d-flex" style="justify-content: stretch;">
+                                
+                                {% for category in categories %}
+                                <div class="col-sm-4">
+                                    <a href="{% url 'teacher_subcategory' id=category.id %}">
+                                        <div class="card shadow py-2 rounded">
+                                            <div class="card-body">
+                                                <h4>{{ category.name }}</h4>
+                                                <hr>
+                                                {{ category.description }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'courses' %}">Courses</a></li>
+                            <li><a href="{% url 'events' %}">Events</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+</html>

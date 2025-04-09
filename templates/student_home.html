@@ -1,0 +1,40 @@
+{% extends 'shared/student_base.html' %}
+
+{% block content %}
+<h1>Welcome Student</h1>
+<div class="row">
+
+    <div class="col-sm-12 mb-4">
+        <form method="get">
+            <input type="search" name="q" placeholder="Search for a course" class="form-control" />
+        </form>
+    </div>
+
+    {% if not courses %}
+    <div class="alert alert-primary" role="alert">
+        <strong>No courses enrolled.</strong>
+        Click <a href="{% url 'student_more_courses' %}" class="alert-link">here</a>
+        to enroll in a course.
+    </div>
+
+    {% endif %}
+
+    {% for course in courses %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="{{ course.course.featured_image.url }}" alt="" class="img-fluid"
+                    style="max-width: 300px; max-height: 300px;">
+                <h5 class="card-title mt-2">{{ course.course.name }}</h5>
+                <p class="card-text">Category: {{ course.course.sub_category }}</p>
+                <p class="card-text">Price: {{ course.course.price }}</p>
+                <p class="card-text">{{ course.course.description|truncatewords:15 }}</p>
+                <a href="{% url 'student_view_lesson' id=course.course.lessons.first.id %}"
+                    class="btn btn-primary">Continue Learning</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}

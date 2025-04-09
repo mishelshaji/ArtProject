@@ -1,0 +1,33 @@
+{% extends 'shared/admin_base.html' %}
+
+{% block content %}
+<!-- Dashboard Cards Section -->
+<div class="container-fluid">
+    <h1>Contact Requests</h1>
+    <table class="table table-light table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in data %}
+            <tr>
+                <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.phone_number }}</td>
+                <td>{{ contact.message }}</td>
+                <th>
+                    <a href="{% url 'admin_contact_delete' contact.id %}" class="text-danger"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
